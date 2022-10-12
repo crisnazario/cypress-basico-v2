@@ -20,6 +20,16 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('.success').should('be.visible').contains('Mensagem enviada com sucesso.')
     })
 
+    it.only('preenche os campos obrigatórios com email inválido e envia o formulário', function () {
+        cy.get('#firstName').type('Cris')
+        cy.get('#lastName').type('Nazário')
+        cy.get('#email').type('email@email,com')
+        cy.get('#open-text-area').type('Minions ipsum gelatooo uuuhhh para tú bappleees para tú tank yuuu! Gelatooo po kass. Bappleees poopayee tulaliloo pepete belloo! Wiiiii. Baboiii hana dul sae bappleees pepete hana dul sae po kass po kass baboiii. Belloo! hahaha baboiii poopayee hahaha belloo! La bodaaa bee do bee do bee do chasy. Pepete poopayee tank yuuu! Butt la bodaaa wiiiii aaaaaah ti aamoo! Poulet tikka masala. Tatata bala tu daa ti aamoo! Poulet tikka masala poopayee wiiiii bappleees hana dul sae ti aamoo! Jeje belloo!', { 'delay': 0 })
+        cy.contains('button', 'Enviar').click()
+
+        cy.get('.error').should('be.visible')
+    })
+
     it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function () {
         cy.get('#email').type('email@')
 
